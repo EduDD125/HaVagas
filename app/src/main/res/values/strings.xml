@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">HaVagas</string>
+    <string-array name="formacao_array">
+        <item></item>
+        <item>fundamental</item>
+        <item>ensino medio</item>
+        <item>graduacao</item>
+        <item>especializacao</item>
+        <item>mestrado</item>
+        <item>doutorado</item>
+    </string-array>
 </resources>

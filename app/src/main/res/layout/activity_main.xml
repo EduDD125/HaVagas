@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,13 +8,382 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Area do Titulo da pagina -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tituloTv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="4dp"
+        android:background="@color/purple"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="HaVagas"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Area do nome -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tituloTv"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/nomeCompletoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Nome Completo"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/tituloTv"/>
+
+            <EditText
+                android:id="@+id/nomeCompletoEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nomeCompletoTv"
+                android:hint="Digite seu nome completo..."
+                android:padding="12dp"
+                android:inputType="textPersonName"
+                android:background="#DDDDDD"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <!-- Area do e-mail -->
+            <TextView
+                android:id="@+id/emailTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nomeCompletoEt"
+                android:text="E-mail"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/emailEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/emailTv"
+                android:inputType="textEmailAddress"
+                android:hint="Digite seu email..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <!-- Checkbox de ingressar  na lista de email -->
+            <CheckBox
+                android:id="@+id/listaEmailCb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Você quer receber e-mails com atualizações de oportunidades?"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/emailEt"/>
+
+            <!-- Area do telefone -->
+            <TextView
+                android:id="@+id/telefoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Telefone"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/listaEmailCb"/>
+
+            <EditText
+                android:id="@+id/telefoneEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/telefoTv"
+                android:hint="Digite seu email..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <!-- Area de telefone celular -->
+
+            <CheckBox
+                android:id="@+id/telefoneCelularCb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Você possui telefone celular?"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/emailEt"/>
+
+            <TextView
+                android:id="@+id/telefoneCelularTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Telefone Celular"
+                android:visibility="gone"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/telefoneEt"/>
+
+            <EditText
+                android:id="@+id/telefoneCelularEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/telefoneCelularTv"
+                android:hint="Digite seu email..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:visibility="gone"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <!-- Area de definição de sexo - RadioGroup -->
+            <TextView
+                android:id="@+id/sexoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/telefoneCelularEt"
+                android:text="Sexo"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <RadioGroup
+                android:id="@+id/sexoRg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/sexoTv"
+                app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/masculinoRb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Masculino"
+                    android:layout_marginRight="30dp"/>
+
+                <RadioButton
+                    android:id="@+id/femininoRb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Feminino" />
+
+            </RadioGroup>
+
+            <!-- Area Data de nascimento -->
+
+            <TextView
+                android:id="@+id/dataNascimentoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/sexoRg"
+                android:text="Data de Nascimento"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+            <DatePicker
+                android:id="@+id/dataNascimentoDp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dataNascimentoTv" />
+
+            <!-- area Formacao -->
+            <TextView
+                android:id="@+id/formacaoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dataNascimentoDp"
+                android:text="Formação"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <Spinner
+                android:id="@+id/formacaoSp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:entries="@array/formacao_array"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/formacaoTv" />
+
+
+            <!-- Area complementos da formacao -->
+            <TextView
+                android:id="@+id/anoFormaturaTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/formacaoSp"
+                android:text="Ano de formatura"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/anoFormaturaEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/anoFormaturaTv"
+                android:hint="Digite o ano da formatura..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:visibility="gone"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/anoConclusaoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/anoFormaturaEt"
+                android:text="Ano de formatura"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/anoConclusaoEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/anoConclusaoTv"
+                android:hint="Digite o ano da formatura..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:visibility="gone"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/instituicaoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/anoConclusaoEt"
+                android:text="Instituicao"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/instituicaoEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/instituicaoTv"
+                android:hint="Digite o nome da instituicao onde se formou..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:visibility="gone"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/tituloMonografiaTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/instituicaoEt"
+                android:text="Titulo da Monografia"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/tituloMonografiaEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/tituloMonografiaTv"
+                android:hint="Digite o titulo de sua monografia..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:visibility="gone"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/nomeOrientadorTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tituloMonografiaEt"
+                android:text="Titulo da Monografia"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/nomeOrientadorEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/nomeOrientadorTv"
+                android:hint="Digite o nome de seu orientador..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:visibility="gone"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+
+            <!-- Area botões de limpar e salvar -->
+
+            <TextView
+                android:id="@+id/vagasInteresseTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nomeOrientadorEt"
+                android:text="Vagas de interesse"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:layout_margin="8dp" />
+
+            <EditText
+                android:id="@+id/vagasInteresseEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                app:layout_constraintTop_toBottomOf="@id/vagasInteresseTV"
+                android:hint="Digite quais tipos de vagas te enteressam..."
+                android:padding="12dp"
+                android:background="#DDDDDD"
+                android:visibility="gone"
+                android:backgroundTintMode="src_in"
+                android:layout_margin="8dp" />
+            <!-- Area botões de limpar e salvar -->
+            <LinearLayout
+                android:id="@+id/buttonsLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/formacaoSp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="50dp">
+
+                <Button
+                    android:id="@+id/limparBt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/purple"
+                    android:text="Limpar"
+                    android:layout_margin="8dp" />
+                <Button
+                    android:id="@+id/salvaBt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/purple"
+                    android:text="Salvar"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
