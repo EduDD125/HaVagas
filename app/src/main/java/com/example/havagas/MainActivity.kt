@@ -1,10 +1,12 @@
 package com.example.havagas
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,6 +16,7 @@ import com.example.havagas.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var formacao = ""
+    private var dataSelecionada = ""
     private val amb: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -21,6 +24,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(amb.root)
+
+        var diaDoMes = amb.dataNascimentoDp.dayOfMonth
+        var mes = amb. dataNascimentoDp.month
+        var ano = amb.dataNascimentoDp.year
+
+        dataSelecionada = String.format("%s / %s / %s", diaDoMes, mes, ano)
 
         amb.limparBt.setOnClickListener {
             with (amb) {
@@ -31,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 telefoneCelularCb.isChecked = false
                 telefoneCelularEt.setText("")
                 sexoRg.clearCheck()
-                //TODO logica de 'limpar' dte Picker
+                dataSelecionadaTv.setText("")
                 formacaoSp.setSelection(0)
                 anoConclusaoEt.setText("")
                 instituicaoEt.setText("")
@@ -127,7 +136,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.femininoRb -> "Feminino"
                     else -> "Indefinido"
                 }
-                // Todo pegar data de nascimento
 
                 val formacao = formacaoSp.selectedItem.toString()
                 var anoFormacao = anoConclusaoEt.text.toString()
@@ -138,9 +146,27 @@ class MainActivity : AppCompatActivity() {
 
                 val vagasInteresse = vagasInteresseEt.text.toString()
 
-                // TODO format string and toast
+                var mensagem = String.format("####   Dados Salvos   ####\n\n" +
+                        "nomeCompleto: %s \n"+
+                        "email: %s \n" +
+                        "participar da lista: %s \n" +
+                        "telefone: %s \n" +
+                        "telefoneCelular: %s"+
+                        "sexo: %s \n" +
+                        "formacao: %s \n" +
+                        "ano formacao: %s \n" +
+                        "ano conclusao: %s \n" +
+                        "instituicao: %s \n" +
+                        "titulo monografia: %s \n" +
+                        "nome orientador: %s \n" +
+                        "vagasInteresse: %s \n",
+                    nomeCompleto, email, listaEmail, telefone, telefoneCelular,
+                    sexo, formacao, anoFormacao, anoConlusao, instituicao,
+                    tituloMonografia, nomeOrientador, vagasInteresse)
 
+                Toast.makeText(this@MainActivity, mensagem, Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 }
