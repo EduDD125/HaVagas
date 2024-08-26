@@ -1,17 +1,11 @@
 package com.example.havagas
 
-import android.app.Activity
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.get
 import com.example.havagas.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,12 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(amb.root)
-
-        var diaDoMes = amb.dataNascimentoDp.dayOfMonth
-        var mes = amb. dataNascimentoDp.month
-        var ano = amb.dataNascimentoDp.year
-
-        dataSelecionada = String.format("%s / %s / %s", diaDoMes, mes, ano)
 
         amb.limparBt.setOnClickListener {
             with (amb) {
@@ -49,6 +37,23 @@ class MainActivity : AppCompatActivity() {
                 vagasInteresseEt.setText("")
             }
         }
+
+        amb.telefoneCelularCb.setOnClickListener {
+            if (amb.telefoneCelularCb.isChecked) {
+                amb.telefoneCelularTv.visibility = View.VISIBLE
+                amb.telefoneCelularEt.visibility = View.VISIBLE
+            } else {
+                amb.telefoneCelularTv.visibility = View.GONE
+                amb.telefoneCelularEt.visibility = View.GONE
+
+            }
+        }
+
+        amb.dataNascimentoDp.setOnDateChangedListener { _, year, mouth, day ->
+            dataSelecionada = String.format("%s / %s / %s", day, mouth, year)
+        }
+
+
         amb.formacaoSp.onItemSelectedListener = object: OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?,
                                         view: View?,
@@ -137,22 +142,43 @@ class MainActivity : AppCompatActivity() {
                     else -> "Indefinido"
                 }
 
-                val formacao = formacaoSp.selectedItem.toString()
-                var anoFormacao = anoConclusaoEt.text.toString()
-                var  anoConlusao = anoConclusaoEt.text.toString()
-                var instituicao = instituicaoEt.text.toString()
-                var tituloMonografia = tituloMonografiaEt.text.toString()
-                var nomeOrientador = nomeOrientadorEt.text.toString()
-
-                val vagasInteresse = vagasInteresseEt.text.toString()
+                val formacao = when (formacaoSp.selectedItem.toString()) {
+                    "" -> "Indefinido"
+                    else -> formacaoSp.selectedItem.toString()
+                }
+                var anoFormacao = when (anoConclusaoEt.text.toString()) {
+                    "" -> "Indefinido"
+                    else -> anoConclusaoEt.text.toString()
+                }
+                var anoConlusao = when (anoConclusaoEt.text.toString()) {
+                    "" -> "Indefinido"
+                    else -> anoConclusaoEt.text.toString()
+                }
+                var instituicao = when (instituicaoEt.text.toString()) {
+                    "" -> "Indefinido"
+                    else -> instituicaoEt.text.toString()
+                }
+                var tituloMonografia = when (tituloMonografiaEt.text.toString()) {
+                    "" -> "Indefinido"
+                    else -> tituloMonografiaEt.text.toString()
+                }
+                var nomeOrientador = when (nomeOrientadorEt.text.toString()) {
+                    "" -> "Indefinido"
+                    else -> nomeOrientadorEt.text.toString()
+                }
+                var vagasInteresse = when (vagasInteresseEt.text.toString()) {
+                    "" -> "Indefinido"
+                    else -> vagasInteresseEt.text.toString()
+                }
 
                 var mensagem = String.format("####   Dados Salvos   ####\n\n" +
                         "nomeCompleto: %s \n"+
                         "email: %s \n" +
                         "participar da lista: %s \n" +
                         "telefone: %s \n" +
-                        "telefoneCelular: %s"+
+                        "telefoneCelular: %s \n"+
                         "sexo: %s \n" +
+                        "data nascimento: %s \n" +
                         "formacao: %s \n" +
                         "ano formacao: %s \n" +
                         "ano conclusao: %s \n" +
@@ -161,7 +187,7 @@ class MainActivity : AppCompatActivity() {
                         "nome orientador: %s \n" +
                         "vagasInteresse: %s \n",
                     nomeCompleto, email, listaEmail, telefone, telefoneCelular,
-                    sexo, formacao, anoFormacao, anoConlusao, instituicao,
+                    sexo, dataSelecionada, formacao, anoFormacao, anoConlusao, instituicao,
                     tituloMonografia, nomeOrientador, vagasInteresse)
 
                 Toast.makeText(this@MainActivity, mensagem, Toast.LENGTH_SHORT).show()
